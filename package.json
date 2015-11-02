@@ -1,0 +1,57 @@
+{
+  "name": "itsa-react-fs-markdown",
+  "version": "1.0.0",
+  "description": "Read markdownfiles as react-components",
+  "author": [
+    {
+      "name": "Marco Asbreuk",
+      "email": "marco@itsasbreuk.nl"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/itsa-server/itsa-react-fs-markdown"
+  },
+  "bugs": {
+    "url": "https://github.com/itsa-server/itsa-react-fs-markdown/issues"
+  },
+  "keywords": [
+    "itsa",
+    "itsa-server",
+    "itsasbreuk",
+    "markdown",
+    "react",
+    "fs"
+  ],
+  "main": "index.js",
+  "engines": {
+    "node": "*"
+  },
+  "dependencies": {
+    "commonmark-react-renderer": "^2.0.1",
+    "highlight.js": "^8.9.1",
+    "path": "^0.12.7",
+    "react": "^0.13.3",
+    "react-markdown": "^1.0.5",
+    "remarkable": "^1.6.0"
+  },
+  "devDependencies": {
+    "chai": "^1.9.1",
+    "istanbul": "^0.3.0",
+    "jshint": "^2.5.5",
+    "mocha": "^1.21.4"
+  },
+  "scripts": {
+    "pretest": "jshint  ./lib/*.js",
+    "test": "mocha tests/*.js  && istanbul cover $(which _mocha) -- tests/*.js",
+    "lint": "jshint ./lib/*.js"
+  },
+  "homepage": "http://itsa.github.io",
+  "maintainers": [
+    {
+      "name": "Marco Asbreuk",
+      "email": "marco@itsasbreuk.nl"
+    }
+  ],
+  "license": "New BSD"
+}
