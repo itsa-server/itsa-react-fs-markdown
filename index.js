@@ -2,16 +2,20 @@
 
 'use strict';
 
-let CACHE = {},
-    BASE_DIR;
+var CACHE = {},
+    BASE_DIR,
+    Path = require('path'),
+    fs = require('fs'),
+    hljs = require('highlight.js'),
+    React = require('react'),
+    Remarkable = require('remarkable'),
+    endsWith, md;
 
-const Path = require('path'),
-      fs = require('fs'),
-      hljs = require('highlight.js'),
-      React = require('react'),
-      Remarkable = require('remarkable');
+endsWith = function(str, test, caseInsensitive) {
+    return (new RegExp(test+'$', caseInsensitive ? 'i': '')).test(str);
+};
 
-const md = new Remarkable({
+md = new Remarkable({
     html: true,
     xhtmlOut: true,
     breaks: true,
@@ -32,26 +36,26 @@ const md = new Remarkable({
     }
 });
 
-const ReactMarkdown = React.createClass({
+var ReactMarkdown = React.createClass({
     render: function() {
-        const ast = md.render(this.props.source || '');
+        var ast = md.render(this.props.source || '');
         return React.DOM.div({dangerouslySetInnerHTML: {__html: ast}});
     }
 });
 
-const FsMarkdown = {
-    readFile(filename) {
-        if (!filename.toUpperCase().endsWith('.MD')) {
+var FsMarkdown = {
+    readFile: function(filename) {
+        if (!endsWith(filename.toUpperCase(), '.MD')) {
             filename += '.MD';
         }
         if (!CACHE[filename]) {
-            CACHE[filename] = new Promise((resolve) => {
-                fs.readFile(Path.join(BASE_DIR, filename), 'utf8', (err, data) => {
+            CACHE[filename] = new Promise(function(resolve) {
+                fs.readFile(Path.join(BASE_DIR, filename), 'utf8', function(err, data) {
                     if (err) {
                         resolve({__html: ''});
                     }
                     else {
-                        const Component = React.createElement(ReactMarkdown, {source: data});
+                        var Component = React.createElement(ReactMarkdown, {source: data});
                         resolve({__html: React.renderToStaticMarkup(Component)});
                     }
                 });
@@ -60,19 +64,19 @@ const FsMarkdown = {
         return CACHE[filename];
     },
 
-    clearCachedFile(filename) {
-        if (!filename.toUpperCase().endsWith('\.MD')) {
+    clearCachedFile: function(filename) {
+        if (!endsWith(filename.toUpperCase(), '.MD')) {
             filename += '.MD';
         }
         delete CACHE[filename];
     },
 
-    clearCache() {
+    clearCache: function() {
         CACHE = {};
     }
 };
 
-module.exports = baseDir => {
+module.exports = function(baseDir) {
     BASE_DIR = baseDir;
     return FsMarkdown;
 };
