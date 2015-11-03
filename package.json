@@ -33,7 +33,8 @@
     "path": "^0.12.7",
     "react": "^0.13.3",
     "react-markdown": "^1.0.5",
-    "remarkable": "^1.6.0"
+    "remarkable": "^1.6.0",
+    "js-ext": "itsa/js-ext"
   },
   "devDependencies": {
     "chai": "^1.9.1",
