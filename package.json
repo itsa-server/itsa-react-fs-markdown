@@ -1,6 +1,6 @@
 {
   "name": "itsa-react-fs-markdown",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "description": "Read markdownfiles as react-components",
   "author": [
     {
@@ -33,8 +33,7 @@
     "path": "^0.12.7",
     "react": "^0.14.2",
     "react-markdown": "^1.0.5",
-    "remarkable": "^1.6.0",
-    "js-ext": "itsa/js-ext"
+    "remarkable": "^1.6.0"
   },
   "devDependencies": {
     "chai": "^1.9.1",

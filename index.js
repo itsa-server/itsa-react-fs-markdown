@@ -8,6 +8,7 @@ var CACHE = {},
     fs = require('fs'),
     hljs = require('highlight.js'),
     React = require('react'),
+    ReactDOMServer = require('react-dom/server'),
     Remarkable = require('remarkable'),
     endsWith, md;
 
@@ -56,7 +57,7 @@ var FsMarkdown = {
                     }
                     else {
                         var Component = React.createElement(ReactMarkdown, {source: data});
-                        resolve({__html: React.renderToStaticMarkup(Component)});
+                        resolve({__html: ReactDOMServer.renderToStaticMarkup(Component)});
                     }
                 });
             });
